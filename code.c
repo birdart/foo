@@ -1,1 +1,1 @@
-#inlude <stdio.h>
+#inlude <stdin.h>
