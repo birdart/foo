@@ -40,5 +40,6 @@ jobs:
     - name: rake test
       run: |
         echo -n "starting rake test..."
+        cd bigmonolith
         ./run.sh
         echo "done"

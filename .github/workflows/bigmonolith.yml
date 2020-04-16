@@ -45,5 +45,6 @@ jobs:
     - name: lucky tests
       run: |
         echo -n "starting lucky tests..."
+        cd bigmonolith
         ./run.sh
         echo "done"
