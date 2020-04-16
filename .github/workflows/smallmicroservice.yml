@@ -1,19 +1,26 @@
-# This is a basic workflow to help you get started with Actions
+---
 
-name: CI
+# This is a basic workflow to help you get started with Actions
+# One YAML file is one workflow.
+
+name: smallmicroservice
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
+    paths:
+      - 'smallmicroservice/**'
     branches: [ master ]
   pull_request:
+    paths:
+      - 'smallmicroservice/**'
     branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  lucky_test:
     # The type of runner that the job will run on
     runs-on: self-hosted
 
@@ -22,12 +29,16 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: docker build
       run: |
-        sleep 60
-        echo test, and deploy your project.
+        echo "docker build...done"
+
+    - name: db setup
+      run: |
+        echo "db setup...done"
+
+    - name: rake test
+      run: |
+        echo -n "starting rake test..."
+        ./run.sh
+        echo "done"

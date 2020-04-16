@@ -1,0 +1,49 @@
+---
+
+# This is a basic workflow to help you get started with Actions
+# One YAML file is one workflow.
+
+name: bigmonolith
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    paths:
+      - 'bigmonolith/**'
+    branches: [ master ]
+  pull_request:
+    paths:
+      - 'bigmonolith/**'
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  lucky_test:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: docker build
+      run: |
+        echo "docker build...done"
+
+    - name: db snapshot
+      run: |
+        echo building...
+        echo "loading snapshot...done"
+
+    - name: db migrations
+      run: |
+        echo "migrating...done"
+
+    - name: lucky tests
+      run: |
+        echo -n "starting lucky tests..."
+        ./run.sh
+        echo "done"
